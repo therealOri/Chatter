@@ -1,3 +1,4 @@
+#Discord Bot code/Normal Code.
 import discord
 from discord.ext import commands
 import colorama
