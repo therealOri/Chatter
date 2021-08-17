@@ -2,7 +2,7 @@
 Discord Chat logger. Log every message that gets sent on discord!
 __ __
 
-ChatterEye grabs chat messages from all servers you/your bot is in and from all of the channels it can see. Then sends/Logs all of it into chat_logs.db.
+ChatterEye grabs chat messages from all servers you/your bot is in and from all of the channels it can see. You can also set it to only read from a server/guild of your choosing and a channel of your choosing in said guild. You can edit this in `.env`. Then it sends/Logs all chat messages into chat_logs.db.
 The database is written in/for sqlite3, so you will need `DB Browser for SQLite` for viewing the databse.
 #
 You can use either a discord bot token or a user token for this. but note that **Using a selfbot is against discord TOS**.
