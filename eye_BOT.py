@@ -11,6 +11,8 @@ import sqlite3
 
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
+GUILD_ID = os.getenv("GUILD_ID")
+CHANNEL_ID = os.getenv("CHANNEL_ID")
 
 
 BOT_Prefix=("&.")
@@ -42,25 +44,25 @@ print("Reading chat...")
 async def on_message(message):
     if message.author == client.user: # Ignores itself
         return
-    author = str(message.author)
-    content = str(message.content)
-    userid = str(message.author.id)
-    time = str(message.created_at)
-    guild = str(message.guild)
-    channel = str(message.channel)
-    row = [guild, channel, author, userid, time, content]
+    if str(message.guild.id) == GUILD_ID and str(message.channel.id) == CHANNEL_ID:
+      author = str(message.author)
+      content = str(message.content)
+      userid = str(message.author.id)
+      time = str(message.created_at)
+      guild = str(message.guild)
+      channel = str(message.channel)
+      row = [guild, channel, author, userid, time, content]
 
-    conn = sqlite3.connect('chat_logs.db')
-    c = conn.cursor()
+      conn = sqlite3.connect('chat_logs.db')
+      c = conn.cursor()
 
-    # Insert data
-    c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row)
+      # Insert data
+      c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row)
 
-    # Save (commit) the changes
-    conn.commit()
-    conn.close()
-    print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
-    await client.process_commands(content)
+      # Save (commit) the changes
+      conn.commit()
+      conn.close()
+      print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
 
 
 client.run(BOT_TOKEN)
