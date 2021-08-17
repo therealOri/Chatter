@@ -41,59 +41,61 @@ class MyClient(discord.Client):
       if message.author == self.user:
             return
 
-        if str(message.guild.id) == GUILD_ID and str(message.channel.id) == CHANNEL_ID:
-            author = str(message.author) 
-            content = str(message.content)
-            userid = str(message.author.id)
-            time = str(message.created_at)
-            guild = str(message.guild)
-            channel = str(message.channel)
-            row = [guild, channel, author, userid, time, content]
+      if str(message.guild.id) == GUILD_ID and str(message.channel.id) == CHANNEL_ID:
+        author = str(message.author) 
+        content = str(message.content)
+        userid = str(message.author.id)
+        time = str(message.created_at)
+        guild = str(message.guild)
+        channel = str(message.channel)
+        row = [guild, channel, author, userid, time, content]
 
-            conn = sqlite3.connect('chat_logs.db')
-            c = conn.cursor()
-            c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row) # Insert data
+        conn = sqlite3.connect('chat_logs.db')
+        c = conn.cursor()
+        c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row) # Insert data
 
-            # Save (commit) the changes then close the file.
-            conn.commit()
-            conn.close()
+        # Save (commit) the changes then close the file.
+        conn.commit()
+        conn.close()
 
-            print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
+        print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
+ 
 
-        elif str(message.guild.id) == GUILD_ID and CHANNEL_ID == '':
-            author = str(message.author) 
-            content = str(message.content)
-            userid = str(message.author.id)
-            time = str(message.created_at)
-            guild = str(message.guild)
-            channel = str(message.channel)
-            row = [guild, channel, author, userid, time, content]
+      if str(message.guild.id) == GUILD_ID and CHANNEL_ID == '':
+        author = str(message.author) 
+        content = str(message.content)
+        userid = str(message.author.id)
+        time = str(message.created_at)
+        guild = str(message.guild)
+        channel = str(message.channel)
+        row = [guild, channel, author, userid, time, content]
 
-            conn = sqlite3.connect('chat_logs.db')
-            c = conn.cursor()
-            c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row)
-            conn.commit()
-            conn.close()
+        conn = sqlite3.connect('chat_logs.db')
+        c = conn.cursor()
+        c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row)
+        conn.commit()
+        conn.close()
 
-            print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
+        print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
+          
+          
+      if GUILD_ID == '' and CHANNEL_ID == '':
+        author = str(message.author) 
+        content = str(message.content)
+        userid = str(message.author.id)
+        time = str(message.created_at)
+        guild = str(message.guild)
+        channel = str(message.channel)
+        row = [guild, channel, author, userid, time, content]
 
-        else:
-            if GUILD_ID == '' and CHANNEL_ID == '':
-                author = str(message.author) 
-                content = str(message.content)
-                userid = str(message.author.id)
-                time = str(message.created_at)
-                guild = str(message.guild)
-                channel = str(message.channel)
-                row = [guild, channel, author, userid, time, content]
+        conn = sqlite3.connect('chat_logs.db')
+        c = conn.cursor()
+        c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row)
+        conn.commit()
+        conn.close()
 
-                conn = sqlite3.connect('chat_logs.db')
-                c = conn.cursor()
-                c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row)
-                conn.commit()
-                conn.close()
+        print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
 
-                print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
-
+        
 client = MyClient()
 client.run(TOKEN)
