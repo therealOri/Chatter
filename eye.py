@@ -34,68 +34,37 @@ console = Console()
 console.print(BANNER)
 print(Fore.WHITE + "[" + Fore.GREEN + '+' + Fore.WHITE + "]" + Fore.GREEN + " connection established!, Reading chat...")
 
-
+# Add a way to set status as offline/invisible on startup.
 
 class MyClient(discord.Client):
     async def on_message(self, message):
+      def logger():
+        author = str(message.author) 
+        content = str(message.content)
+        userid = str(message.author.id)
+        time = str(message.created_at)
+        guild = str(message.guild)
+        hannel = str(message.channel)
+        row = [guild, channel, author, userid, time, content]
+        conn = sqlite3.connect('chat_logs.db')
+        c = conn.cursor()
+        c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row)
+        conn.commit()
+        conn.close()
+        print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
+      
       if message.author == self.user:
-            return
+        return
 
       if str(message.guild.id) == GUILD_ID and str(message.channel.id) == CHANNEL_ID:
-        author = str(message.author) 
-        content = str(message.content)
-        userid = str(message.author.id)
-        time = str(message.created_at)
-        guild = str(message.guild)
-        channel = str(message.channel)
-        row = [guild, channel, author, userid, time, content]
-
-        conn = sqlite3.connect('chat_logs.db')
-        c = conn.cursor()
-        c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row) # Insert data
-
-        # Save (commit) the changes then close the file.
-        conn.commit()
-        conn.close()
-
-        print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
- 
+        logger()
 
       if str(message.guild.id) == GUILD_ID and CHANNEL_ID == '':
-        author = str(message.author) 
-        content = str(message.content)
-        userid = str(message.author.id)
-        time = str(message.created_at)
-        guild = str(message.guild)
-        channel = str(message.channel)
-        row = [guild, channel, author, userid, time, content]
-
-        conn = sqlite3.connect('chat_logs.db')
-        c = conn.cursor()
-        c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row)
-        conn.commit()
-        conn.close()
-
-        print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
-          
+        logger()
           
       if GUILD_ID == '' and CHANNEL_ID == '':
-        author = str(message.author) 
-        content = str(message.content)
-        userid = str(message.author.id)
-        time = str(message.created_at)
-        guild = str(message.guild)
-        channel = str(message.channel)
-        row = [guild, channel, author, userid, time, content]
-
-        conn = sqlite3.connect('chat_logs.db')
-        c = conn.cursor()
-        c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row)
-        conn.commit()
-        conn.close()
-
-        print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
-
+        logger()
         
+
 client = MyClient()
 client.run(TOKEN)
