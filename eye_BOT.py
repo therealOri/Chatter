@@ -15,8 +15,13 @@ GUILD_ID = os.getenv("GUILD_ID")
 CHANNEL_ID = os.getenv("CHANNEL_ID")
 
 
+intents = discord.Intents.all()
+intents.members = True
+intents.messages = True
+
+
 BOT_Prefix=("&.")
-client = commands.Bot(command_prefix=BOT_Prefix)
+client = commands.Bot(command_prefix=BOT_Prefix, intents=intents)
 client.remove_command("help")
 
 
