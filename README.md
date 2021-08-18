@@ -22,6 +22,6 @@ You can download it [Here](https://sqlitebrowser.org/).
 ![database_image](https://user-images.githubusercontent.com/45724082/129487478-2550226d-ac2a-4aea-b354-7d5c2794e193.png)
 __ __
 # Notice
-I am not responsible or liable for the misuse or malicious purpose/applications of this code. Use at your own risk. If you get punished for using this, that is All and fully on you. I made this code to be a proof of concept to show how easily you log chat messages using discord bots/python code. And I shall not be punished on discord or off of discord for the actions of those who do decide to use this code.
+I am not responsible or liable for the misuse or malicious purpose/applications of this code. Use at your own risk. If you get punished for using this, that is All and fully on you. I made this code to be a proof of concept to show how easily you can log chat messages using discord bots/python code. And I shall not be punished on discord or off of discord for the actions of those who do decide to use this code.
 #
 **Selfbots are against TOS and can get the account being used as one banned/suspended. Please use at your own risk if you decide to use it for a selfbot.**
