@@ -51,7 +51,7 @@ async def on_message(message):
     userid = str(message.author.id)
     time = str(message.created_at)
     guild = str(message.guild)
-    hannel = str(message.channel)
+    channel = str(message.channel)
     row = [guild, channel, author, userid, time, content]
     conn = sqlite3.connect('chat_logs.db')
     c = conn.cursor()
