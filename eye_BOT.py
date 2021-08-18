@@ -38,8 +38,6 @@ print(Fore.WHITE + "[" + Fore.GREEN + '+' + Fore.WHITE + "]" + Fore.GREEN + " co
 print("Reading chat...")
 
 
-
-
 @client.event
 async def on_message(message):
   def logger():
