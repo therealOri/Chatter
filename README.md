@@ -14,6 +14,7 @@ __ __
 git clone https://therealOri/ChatterEye.git
 cd ChatterEye
 pip3 install -r requirements.txt
+pip3 install git+https://github.com/dolfies/discord.py-self.git@renamed
 ```
 #
 # Databse Viewer 
