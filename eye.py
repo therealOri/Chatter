@@ -1,5 +1,5 @@
 # Selfbot Code
-import discord
+import selfcord as discord
 from discord.ext import commands
 import colorama
 from colorama import Fore, Back, Style
