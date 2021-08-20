@@ -11,6 +11,8 @@ import sqlite3
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
+GUILD_ID = os.getenv("GUILD_ID")
+CHANNEL_ID = os.getenv("CHANNEL_ID")
 
 
 BOT_Prefix=("&.")
