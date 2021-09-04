@@ -67,7 +67,7 @@ class MyClient(discord.Client):
       if str(message.guild.id) == GUILD_ID and CHANNEL_ID == '':
         logger()
         
-      #Logs all messages from all guilds and all channels you are able to see.    
+      #Logs all messages from all guilds and all channels you are able to see and are in.  
       if GUILD_ID == '' and CHANNEL_ID == '':
         logger()
         
