@@ -46,7 +46,7 @@ class MyClient(discord.Client):
         userid = str(message.author.id)
         time = str(message.created_at)
         guild = str(message.guild)
-        hannel = str(message.channel)
+        channel = str(message.channel)
         row = [guild, channel, author, userid, time, content]
         conn = sqlite3.connect('chat_logs.db')
         c = conn.cursor()
@@ -55,15 +55,19 @@ class MyClient(discord.Client):
         conn.close()
         print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
       
+      #Ignores itself.
       if message.author == self.user:
         return
-
+      
+      #Logs all messages in a channel in a specified server.
       if str(message.guild.id) == GUILD_ID and str(message.channel.id) == CHANNEL_ID:
         logger()
-
+        
+      #Logs all messages in a guild of your choosing.
       if str(message.guild.id) == GUILD_ID and CHANNEL_ID == '':
         logger()
-          
+        
+      #Logs all messages from all guilds and all channels you are able to see.    
       if GUILD_ID == '' and CHANNEL_ID == '':
         logger()
         
