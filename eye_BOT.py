@@ -15,10 +15,9 @@ GUILD_ID = os.getenv("GUILD_ID")
 CHANNEL_ID = os.getenv("CHANNEL_ID")
 
 
-intents = discord.Intents.all()
+intents = discord.Intents.default()
 intents.members = True
-intents.messages = True
-
+intents.message_content = True
 
 BOT_Prefix=("&.")
 client = commands.Bot(command_prefix=BOT_Prefix, intents=intents)
@@ -58,7 +57,7 @@ async def on_message(message):
     c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row)
     conn.commit()
     conn.close()
-    print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + "[{}] | [{}] | [{}] [{}] @ {}: {}".format(guild, channel, author, userid, time, content))
+    print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + f"[{guild}] | [{channel}] | [{author}] [{userid}] @ {time}: {content}")
         
       
     if message.author == client.user: # Ignores itself
