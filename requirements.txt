@@ -1,4 +1,4 @@
-enhanced-dpy
+discord
 colorama
 os
 io
