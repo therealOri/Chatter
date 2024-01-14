@@ -1,4 +1,6 @@
 # Discord Bot code/Normal Code.
+
+# (01/14/24) - will update to new discord v2+ bot api code soon.
 import discord
 from discord.ext import commands
 import colorama
