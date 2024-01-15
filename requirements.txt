@@ -1,8 +1,1 @@
 discord.py
-colorama
-os
-io
-python-dotenv
-rich
-sqlite3
-aiohttp
