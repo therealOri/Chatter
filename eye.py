@@ -1,53 +1,42 @@
-# Discord Bot code/Normal Code.
-
-# (01/14/24) - will update to new discord v2+ bot api code soon.
 import discord
-from discord.ext import commands
-import colorama
-from colorama import Fore, Back, Style
+from discord import app_commands
 import os
-import io
-from rich.console import Console
-from dotenv import load_dotenv
 import sqlite3
+import tomllib
 
-load_dotenv()
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-GUILD_ID = os.getenv("GUILD_ID")
-CHANNEL_ID = os.getenv("CHANNEL_ID")
+#Load our config
+with open('config.toml', 'rb') as fileObj:
+    config = tomllib.load(fileObj) #dictionary/json
+
+TOKEN = config["BOT_TOKEN"]
+GUILD_ID = config["GUILD_ID"]
+CHANNEL_ID = config["CHANNEL_ID"]
+
+
+
+# +++++++++++ Client Setup +++++++++++ #
+class EYE(discord.Client):
+    def __init__(self, *, intents: discord.Intents):
+        super().__init__(intents=intents)
+        self.tree = app_commands.CommandTree(self)
 
 
 intents = discord.Intents.default()
-intents.members = True
 intents.message_content = True
-
-BOT_Prefix=("&.")
-client = commands.Bot(command_prefix=BOT_Prefix, intents=intents)
-client.remove_command("help")
-
-
-os.system('clear||cls')
-BANNER = '''[magenta]
-  ____ _           _   _            _____           
- / ___| |__   __ _| |_| |_ ___ _ __| ____|   _  ___ 
-| |   | '_ \ / _` | __| __/ _ \ '__|  _|| | | |/ _ \
-| |___| | | | (_| | |_| ||  __/ |  | |__| |_| |  __/
- \____|_| |_|\__,_|\__|\__\___|_|  |_____\__, |\___|
-                                         |___/      
-
-[green]by https://github.com/therealOri[/green]
-[/magenta]
-'''
-console = Console()
-console.print(BANNER)
-print(Fore.WHITE + "[" + Fore.GREEN + '+' + Fore.WHITE + "]" + Fore.GREEN + " connection established, logged in as: " + client.user.name) 
-print("Reading chat...")
+intents.messages = True
+eye = EYE(intents=intents)
+# +++++++++++ Client Setup +++++++++++ #
 
 
-@client.event
-async def on_message(message):
-  def logger():
-    author = str(message.author) 
+
+
+
+def clear():
+    os.system("clear||cls")
+
+
+def logger(message):
+    author = str(message.author)
     content = str(message.content)
     userid = str(message.author.id)
     time = str(message.created_at)
@@ -59,20 +48,33 @@ async def on_message(message):
     c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row)
     conn.commit()
     conn.close()
-    print(Fore.WHITE + "[" + Fore.LIGHTRED_EX + '+' + Fore.WHITE + "]" + Fore.LIGHTRED_EX + f"[{guild}] | [{channel}] | [{author}] [{userid}] @ {time}: {content}")
-        
-      
-    if message.author == client.user: # Ignores itself
+    print(f"[{guild}] | [{channel}] | [@{author}] [{userid}] @ {time}: {content}")
+
+
+@eye.event
+async def on_ready():
+    clear()
+    print(f'Connection established, Logged in as {eye.user} (ID: {eye.user.id}')
+    print('-----------')
+    print("Reading chat...")
+
+
+@eye.event
+async def on_message(message):
+    if message.author == eye.user: # Ignores itself
         return
-      
-    if str(message.guild.id) == GUILD_ID and str(message.channel.id) == CHANNEL_ID:
-      logger()
-        
-    if str(message.guild.id) == GUILD_ID and CHANNEL_ID == '':
-      logger()
-        
-    if GUILD_ID == '' and CHANNEL_ID == '':
-      logger()
+
+    # logs specidied channel in guild.
+    if message.guild.id == GUILD_ID and message.channel.id == CHANNEL_ID:
+        logger(message)
+
+    # logs messages in guild in all channels bot can see/read messages in.
+    if message.guild.id == GUILD_ID and CHANNEL_ID == False:
+        logger(message)
+
+    # All guilds the bot is in and in all channels that the bot can read message in.
+    if GUILD_ID == False and CHANNEL_ID == False:
+        logger(message)
                 
 
-client.run(BOT_TOKEN)
+eye.run(TOKEN, reconnect=True)
