@@ -64,7 +64,7 @@ async def on_message(message):
     if message.author == eye.user: # Ignores itself
         return
 
-    # logs specidied channel in guild.
+    # logs specified channel in guild.
     if message.guild.id == GUILD_ID and message.channel.id == CHANNEL_ID:
         logger(message)
 
