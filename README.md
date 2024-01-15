@@ -12,7 +12,7 @@ __ __
 ```
 git clone https://therealOri/ChatterEye.git
 cd ChatterEye
-pip install -r requirements.txt
+pip install -U discord.py
 ```
 #
 # Databse Viewer 
