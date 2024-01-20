@@ -2,5 +2,8 @@ BOT_TOKEN="" # You know what goes here.
 GUILD_ID=false # Replace false with guild ID
 CHANNEL_ID=false # Replace false with channel ID.
 
+
+attachment_types = ["png", "jpeg", "jpg", 'gif', "mp4", 'mp3', "mov", 'webm', 'txt', 'doc', 'py'] #you can add or remove as many as you want.
+
 # If you don't care about being channel specific, then just leave channel ID as false and just use the guild ID for listening to all channels in the specified guild.
 
