@@ -22,7 +22,7 @@ __ __
 # Databse Viewer 
 You can download it [Here](https://sqlitebrowser.org/).
 #
-![database_image](https://user-images.githubusercontent.com/45724082/129487478-2550226d-ac2a-4aea-b354-7d5c2794e193.png)
+![database_image](https://github.com/therealOri/Chatter/assets/45724082/3e1c8a9e-b551-4300-90a7-e3ac5607efff.png)
 __ __
 
 <br>
