@@ -48,13 +48,8 @@ async def logger(message):
                 pass
         attachment = message.attachments[0]
         attachment_url = attachment.url
-
-        cdn_url_regex = r"https?://cdn\.discordapp\.com/attachments/([0-9]+)/([0-9]+)/([A-Za-z0-9_.-]+)" #file names that will contain _ . or -
-        match = re.search(cdn_url_regex, attachment_url)
-        if match:
-            cdn_link = match.group(0)
-        else:
-            cdn_link = attachment_url
+        cdn_link = attachment_url #links will expire after 24hrs. Idk how their new links system works.
+    
     else:
         cdn_link = ''
 
