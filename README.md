@@ -5,8 +5,11 @@ __ __
 ChatterEye grabs chat messages & attachments from all servers your bot is in and from all of the channels it can see. You can also set it to only read from a server/guild of your choosing and a channel of your choosing in said guild. You can edit this in `config.toml`. Then it sends/Logs all chat messages into chat_logs.db, and saves attachments locally to '/attachments'.
 The database is written in/for sqlite3, so you will need `DB Browser for SQLite` for viewing the databse.
 __ __
+🗒️ Note; <br> The links getting saved to the database when an attachment gets sent to chat will not work currently as discord implemented their new link system invalidating the links. And their new links will expire after 24hrs.
+This feature of chatter may get removed unless I can think of a different way.
 
 <br> 
+<br>
 
 # Installation
 ```
