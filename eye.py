@@ -39,31 +39,28 @@ def clear():
 
 
 async def logger(message):
+    userid = str(message.author.id)
     if message.attachments:
+        media_msg = '(Media/attachment(s) uploaded.)'
         for attachment in message.attachments:
             if any(attachment.filename.lower().endswith(media) for media in attachment_types):
-                await attachment.save(f'attachments/{attachment.filename}')
+                await attachment.save(f'attachments/{userid}_{attachment.filename}')
                 print(f'Saved "{attachment.filename}" to directory "attachments"')
             else:
                 pass
-        attachment = message.attachments[0]
-        attachment_url = attachment.url
-        cdn_link = attachment_url #links will expire after 24hrs. Idk how their new links system works.
-    
     else:
-        cdn_link = ''
+        media_msg = None
 
-    media=cdn_link
+    media = media_msg
     author = str(message.author)
     content = str(message.content)
-    userid = str(message.author.id)
     time = str(message.created_at)
     guild = str(message.guild)
     channel = str(message.channel)
-    row = [guild, channel, author, userid, time, content, media]
+    row = [guild, channel, author, userid, time, content]
     conn = sqlite3.connect('chat_logs.db')
     c = conn.cursor()
-    c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?, ?)", row)
+    c.execute("INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?)", row)
     conn.commit()
     conn.close()
 
