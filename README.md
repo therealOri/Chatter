@@ -25,7 +25,7 @@ __ __
 # Databse Viewer 
 You can download it [Here](https://sqlitebrowser.org/).
 #
-![database_image](https://github.com/therealOri/Chatter/assets/45724082/3e1c8a9e-b551-4300-90a7-e3ac5607efff.png)
+![database_image](https://github.com/therealOri/Chatter/assets/45724082/6ccc1f3a-48ce-47f9-b332-e1eaf631295d.png)
 __ __
 
 <br>
